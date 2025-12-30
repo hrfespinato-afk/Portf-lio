@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Henrique Espinato - Especialista em Tracking de Dados</title>
+    <style>
+        /* --- RESET E VARIÁVEIS --- */
+        :root {
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --primary-blue: #3b82f6;
+            --text-light: #f8fafc;
+            --text-gray: #9ca3af;
+            --section-padding: 80px 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- HEADER & NAVEGAÇÃO --- */
+        header {
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            background: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            font-weight: 500;
+            transition: color 0.3s;
+            color: var(--text-gray);
+        }
+
+        nav a:hover {
+            color: var(--text-light);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--text-gray);
+            color: var(--text-light);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text-light);
+        }
+
+        .header-btn {
+            background-color: transparent;
+            border: 1px solid var(--text-gray);
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* --- SEÇÕES GERAIS --- */
+        section {
+            padding: var(--section-padding);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-subtitle {
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- HERO SECTION --- */
+        #hero {
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .hero-avatar {
+            width: 150px;
+            height: 150px;
+            background-color: var(--bg-card);
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            border: 3px solid var(--primary-blue);
+            overflow: hidden;
+        }
+
+        .hero-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-name {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-actions {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: var(--bg-card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .social-link:hover {
+            color: var(--primary-blue);
+        }
+
+        /* --- O QUE FAÇO SECTION --- */
+        #o-que-faco .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-img-container {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .about-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-content p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+            max-width: 500px;
+        }
+
+        .about-card {
+            background-color: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .about-card-icon {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-card h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-card p {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-bottom: 0;
+        }
+
+        /* --- EXPERTISE SECTION --- */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tech-card {
+            background-color: var(--bg-card);
+            padding: 2rem 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+            transition: color 0.3s;
+        }
+
+        .tech-card:hover .tech-icon {
+            color: var(--primary-blue);
+        }
+
+        .tech-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        .tech-desc {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-top: 0.5rem;
+        }
+
+        /* --- SERVIÇOS CARDS --- */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        @media (min-width: 1024px) {
+            .cards-grid.three-cols {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .service-card, .diferencial-card {
+            background-color: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--primary-blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3, .diferencial-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .service-card p, .diferencial-card p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card ul {
+            list-style: disc;
+            padding-left: 1.5rem;
+            color: var(--text-gray);
+        }
+
+        .service-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .diferencial-card {
+            text-align: center;
+        }
+
+        .diferencial-card .card-icon {
+            margin: 0 auto 1.5rem;
+        }
+
+        .diferencial-card h3 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .diferencial-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* --- CONTATO SECTION --- */
+        #contato .container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+        }
+
+        .contact-info-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+        }
+
+        .contact-details h4 {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-form {
+            background-color: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-gray);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--bg-dark);
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            height: 150px;
+        }
+        
+        /* Botões de Contato (Tags) */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .tag {
+            background-color: var(--bg-card);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            transition: color 0.3s, background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        a.tag:hover {
+             background-color: var(--primary-blue);
+             color: white;
+        }
+
+        footer {
+            background-color: #000;
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .header-btn {
+                display: none;
+            }
+
+            #hero .hero-name {
+                font-size: 2.5rem;
+            }
+
+            #o-que-faco .container,
+            #expertise .container,
+            #contato .container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-cards {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tech-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="#" class="logo"><i class="fas fa-chart-line"></i></a>
+            
+            <nav>
+                <ul>
+                    <li><a href="#o-que-faco">O que faço</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#expertise">Expertise</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+            <a href="curriculo.pdf" download="Curriculo-Henrique-Espinato" class="header-btn">Download CV</a>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <div class="hero-avatar">
+                <img src="perfil.jpg" alt="Foto de Perfil" onerror="this.src='https://via.placeholder.com/150/1e1e1e/3b82f6?text=HE'">
+            </div>
+            
+            <span class="section-subtitle">ESPECIALISTA EM TRACKING DE DADOS</span>
+            <h1 class="hero-name">Henrique Espinato</h1>
+            <p class="section-description">Ajudo empresas a rastrear dados com precisão. Tracking estruturado para decisões baseadas em dados reais.</p>
+            <div class="hero-actions">
+                <a href="#o-que-faco" class="btn btn-primary">Como Funciona</a>
+                <a href="#contato" class="btn btn-outline">Contato</a>
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/espinato_track/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/hrfespinato/" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:contato.henriquebi@gmail.com" class="social-link"><i class="far fa-envelope"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="o-que-faco">
+        <div class="container">
+            <div class="about-img-container">
+                <img src="perfil.jpg" alt="Henrique Espinato" class="about-img" onerror="this.src='https://via.placeholder.com/600x600/1e1e1e/3b82f6?text=Foto+de+Perfil'">
+            </div>
+            <div class="about-content">
+                <span class="section-subtitle">O QUE FAÇO</span>
+                <h2 class="section-title">Tracking de dados para seu negócio</h2>
+                <p>Implemento sistemas completos de rastreamento, garantindo que cada conversão, clique e interação seja capturada com precisão. Isso permite tomar decisões baseadas em dados reais.</p>
+                <p>Trabalho com Google Analytics 4, Google Tag Manager, Meta Pixel e outras ferramentas essenciais para que você saiba exatamente de onde vêm seus resultados e como otimizar suas campanhas.</p>
+                
+                <div class="about-cards">
+                    <div class="about-card">
+                        <div class="about-card-icon"><i class="fas fa-chart-line"></i></div>
+                        <h4>Implementação</h4>
+                        <p>Tracking completo</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-card-icon"><i class="fas fa-cogs"></i></div>
+                        <h4>Configuração</h4>
+                        <p>GA4, GTM, Pixels</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">SERVIÇOS</span>
+                <h2 class="section-title">Como posso ajudar</h2>
+                <p class="section-description">Soluções completas de tracking para garantir que seu negócio tenha dados precisos e confiáveis.</p>
+            </div>
+            <div class="cards-grid three-cols">
+                <div class="service-card">
+                    <div class="card-icon"><i class="fas fa-cog"></i></div>
+                    <h3>Implementação de Tracking</h3>
+                    <p>Configuração completa de Google Analytics 4, Google Tag Manager, Meta Pixel e outros pixels essenciais para rastreamento preciso.</p>
+                    <ul>
+                        <li>GA4 Setup</li>
+                        <li>GTM Containers</li>
+                        <li>Meta Pixel & CAPI</li>
+                        <li>TikTok & Google Ads</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="card-icon"><i class="fas fa-database"></i></div>
+                    <h3>Estruturação de Dados</h3>
+                    <p>Organização de eventos, conversões e funis para que seus dados sejam confiáveis e fáceis de interpretar.</p>
+                    <ul>
+                        <li>Custom Events</li>
+                        <li>Conversões Avançadas</li>
+                        <li>Data Layer</li>
+                        <li>Enhanced Conversions</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="card-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Otimização Contínua</h3>
+                    <p>Análise e ajustes constantes para garantir que o tracking permaneça preciso e alinhado com as mudanças do seu negócio.</p>
+                    <ul>
+                        <li>Auditoria de Tracking</li>
+                        <li>Monitoramento de Erros</li>
+                        <li>Ajustes de Tags</li>
+                        <li>Relatórios de Performance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="expertise">
+        <div class="container">
+            <div class="section-header" style="margin-bottom: 2rem;">
+                <span class="section-subtitle">EXPERTISE</span>
+                <h2 class="section-title">Ferramentas & Tecnologias</h2>
+                <p class="section-description">Domínio completo das principais plataformas de análise e rastreamento de dados do mercado.</p>
+            </div>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fab fa-google"></i></div>
+                    <div class="tech-name">Google Analytics 4</div>
+                    <div class="tech-desc">Análise de Dados</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fas fa-tags"></i></div>
+                    <div class="tech-name">Google Tag Manager</div>
+                    <div class="tech-desc">Gestão de Tags</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fab fa-facebook"></i></div>
+                    <div class="tech-name">Meta Pixel & CAPI</div>
+                    <div class="tech-desc">Tracking Facebook/IG</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fab fa-tiktok"></i></div>
+                    <div class="tech-name">TikTok Pixel</div>
+                    <div class="tech-desc">Tracking de Ads</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <div class="tech-name">Conversões</div>
+                    <div class="tech-desc">Enhanced Conversions</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fas fa-layer-group"></i></div>
+                    <div class="tech-name">Data Layer</div>
+                    <div class="tech-desc">Estrutura de Dados</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fas fa-server"></i></div>
+                    <div class="tech-name">Server-Side</div>
+                    <div class="tech-desc">Tracking Avançado</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fab fa-google-plus-g"></i></div>
+                    <div class="tech-name">Google Ads</div>
+                    <div class="tech-desc">Pixel de Conversão</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="diferenciais">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">DIFERENCIAIS</span>
+                <h2 class="section-title">Por que trabalhar comigo?</h2>
+                <p class="section-description">Foco total em entregar tracking preciso e dados confiáveis para seu e-commerce.</p>
+            </div>
+            <div class="cards-grid three-cols">
+                <div class="diferencial-card">
+                    <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
+                    <h3>100%</h3>
+                    <h4>Dados Precisos</h4>
+                    <p>Tracking confiável e validado</p>
+                </div>
+                <div class="diferencial-card">
+                    <div class="card-icon"><i class="fas fa-toolbox"></i></div>
+                    <h3>10+</h3>
+                    <h4>Ferramentas Dominadas</h4>
+                    <p>GA4, GTM, Pixels e mais</p>
+                </div>
+                <div class="diferencial-card">
+                    <div class="card-icon"><i class="fas fa-award"></i></div>
+                    <h3>100%</h3>
+                    <h4>Comprometimento</h4>
+                    <p>Seus dados, minha prioridade</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato">
+        <div class="container">
+            <div class="contact-info">
+                <span class="section-subtitle">CONTATO</span>
+                <h2 class="section-title">Vamos otimizar seu negócio?</h2>
+                <p class="section-description" style="margin: 0 0 2rem 0; text-align: left;">Precisa de tracking preciso e dados confiáveis? Entre em contato e vamos conversar sobre seu projeto.</p>
+                
+                <div class="contact-info-item">
+                    <div class="contact-icon"><i class="far fa-envelope"></i></div>
+                    <div class="contact-details">
+                        <h4>Email</h4>
+                        <p>contato.henriquebi@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="contact-details">
+                        <h4>WhatsApp</h4>
+                        <p>21 99833-8112</p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="contact-details">
+                        <h4>Localização</h4>
+                        <p>Brasil</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem;">
+                    <p style="margin-bottom: 1rem; color: var(--text-gray);">Me encontre também em:</p>
+                    <div class="tags-container">
+                        <a href="https://www.instagram.com/espinato_track/" target="_blank" class="tag"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="https://www.linkedin.com/in/hrfespinato/" target="_blank" class="tag"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                        <a href="mailto:contato.henriquebi@gmail.com" class="tag"><i class="far fa-envelope"></i> Email</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form id="form-contato" action="https://formspree.io/f/xregvlwg" method="POST">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" name="nome" id="nome" class="form-control" placeholder="Seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" class="form-control" placeholder="seu@email.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="assunto">Assunto</label>
+                        <input type="text" name="assunto" id="assunto" class="form-control" placeholder="Sobre o que deseja conversar?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea name="mensagem" id="mensagem" class="form-control" placeholder="Conte-me sobre seu projeto..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; display: flex; justify-content: center; align-items: center; gap: 0.5rem;">
+                        <i class="far fa-paper-plane"></i> Enviar Mensagem
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Henrique Espinato. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
